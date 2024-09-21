@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head th:replace="fragments::head(~{::title})">
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-2 mt-5">
+            <h1 class="text-center">Login Page</h1>
+            <!--            <div th:if="${errorMessage}" class="alert alert-danger">-->
+            <!--                <span th:text="${errorMessage}"></span>-->
+            <!--            </div>-->
+            <form method="post" action="/auth/login">
+                <!--                <h1 th:text="${errorMessage}"></h1>-->
+                <input type="hidden" name="_csrf" th:value="${_csrf.getToken()}">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input id="username" type="email" class="form-control" name="uname">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input id="password" type="password" class="form-control" name="pswd">
+                </div>
+                <div class="mb-3 form-check">
+                    <input id="rememberMe" type="checkbox" class="form-check-input" name="rememberMe">
+                    <label class="form-check-label" for="rememberMe">Remember Me ?</label>
+                </div>
+                <button type="submit" class="btn btn-success">Login</button>
+                <a href="/auth/register" class="btn btn-primary">Register</a>
+            </form>
+        </div>
+    </div>
+</div>
+<section th:replace="fragments::js_links"></section>
+</body>
+</html>

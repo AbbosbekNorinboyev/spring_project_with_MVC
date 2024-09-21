@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <title>Vocabulary Page</title>
+</head>
+<body>
+<section th:replace="fragments :: navbar"></section>
+<div class="container mt-5">
+    <th:block th:each="element : ${vocabularies}">
+        <h1 th:text="${element.key}"></h1>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Word</th>
+                <th>Translations</th>
+                <th>Synonyms</th>
+                <th>Examples</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="voc : ${element.value}">
+                <th class="text-capitalize" th:text="${voc.word}"></th>
+                <th class="text-danger" th:text="${#strings.listJoin(voc.translations, ', ')}"></th>
+                <th class="text-primary" th:text="${#strings.listJoin(voc.synonyms, ', ')}"></th>
+                <th class="text-success" th:text="${#strings.listJoin(voc.examples, ', ')}"></th>
+            </tr>
+            </tbody>
+        </table>
+    </th:block>
+</div>
+<section th:replace="fragments::js_links"></section>
+</body>
+</html>

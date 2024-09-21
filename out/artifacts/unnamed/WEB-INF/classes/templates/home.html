@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+</head>
+<body>
+<section th:replace="fragments :: navbar"></section>
+<div class="container mt-5">
+    <div class="row">
+        <nav>
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="">
+                        <i class="fa fa-retweet"></i>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <select class="form-select" id="limit">
+                        <th:block th:each="num : ${#numbers.sequence(4,20,4)}">
+                            <option th:value="${num}" th:text="${num}" th:selected="${num == lim}"></option>
+                        </th:block>
+                    </select>
+                </li>
+            </ul>
+        </nav>
+
+        <th:block th:each="vocabulary : ${vocabularies}">
+            <div class="card col-4">
+                <div class="card-body m-1">
+                    <h5 class="card-title" th:text="${vocabulary.word}"></h5>
+                    <h6 class="card-subtitle mb-2" th:text="${#strings.listJoin(vocabulary.translations, ', ')}">
+                    </h6>
+                    <p class="card-text text-warning" th:text="${#strings.listJoin(vocabulary.synonyms, ', ')}"></p>
+                    <p class="card-text text-success fst-italic"
+                       th:utext="${#strings.listJoin(vocabulary.examples, '<br>')}"></p>
+                    <a th:href="@{/vocabulary/delete/{id}(id=${vocabulary.id})}" class="card-link">Delete</a>
+                </div>
+            </div>
+        </th:block>
+    </div>
+</div>
+<section th:replace="fragments::js_links"></section>
+</body>
+</html>

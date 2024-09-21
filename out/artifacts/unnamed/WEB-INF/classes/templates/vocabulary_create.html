@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <title>Create Vocabulary Page</title>
+</head>
+<body>
+<section th:replace="fragments :: navbar"></section>
+<div class="container-fluid m-3">
+    <div class="row mt-5">
+        <div class="col-6">
+            <h1 class="text-center">New Vocabulary</h1>
+            <form action="/vocabulary/add" method="post">
+                <input type="hidden" name="_csrf" th:value="${_csrf.getToken()}">
+                <div class="mb-3">
+                    <label for="word" class="form-label">Word</label>
+                    <input type="text" class="form-control" id="word" name="word">
+                </div>
+                <div id="translations-box">
+                    <div class="mb-3">
+                        <label for="translations" class="form-label">Translation</label>
+                        <input type="text" class="form-control" id="translations" name="translations">
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="add('translation')">Add Translation</button>
+                <div id="synonyms-box">
+                    <div class="mb-3">
+                        <label for="synonyms" class="form-label">Synonyms</label>
+                        <input type="text" class="form-control" id="synonyms" name="synonyms">
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="add('synonym')">Add Synonyms</button>
+                <div id="examples-box">
+                    <div class="mb-3">
+                        <label for="examples" class="form-label">Example</label>
+                        <input type="text" class="form-control" id="examples" name="examples">
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="add('example')">Add Example</button>
+                <br>
+                <button type="submit" class="btn btn-success mt-3">Save</button>
+            </form>
+        </div>
+        <div class="col-6">
+            <h1 class="text-center">Translate</h1>
+
+            <div class="cr">
+                <div class="wr">
+                    <div>
+                        <textarea spellcheck="false" class="form-text" placeholder="Enter text"></textarea>
+                        <textarea spellcheck="false" readonly disabled class="tt" placeholder="Translation"></textarea>
+                    </div>
+                    <ul class="c">
+                        <li class="r from">
+                            <div class="icons">
+                                <i id="from" class="fas fa-volume-up"></i>
+                                <i id="from" class="fas fa-copy"></i>
+                            </div>
+                            <select></select>
+                        </li>
+                        <li class="exchange"><i class="fas fa-exchange-alt"></i></li>
+                        <li class="r to">
+                            <select></select>
+                            <div class="icons">
+                                <i id="to" class="fas fa-volume-up"></i>
+                                <i id="to" class="fas fa-copy"></i>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <button id="translate">Translate Text</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<section th:replace="fragments::js_links"></section>
+</body>
+</html>
